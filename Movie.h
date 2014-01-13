@@ -10,4 +10,11 @@
 
 @interface Movie : NSObject
 
+@property (strong,nonatomic) NSString *title;
+@property (strong,nonatomic) NSString *synopsis;
+@property (strong,nonatomic) UIImage *imageData;
+@property (strong,nonatomic) NSString *actors;
+
+- (id) setValues: (NSDictionary *) values;
+
 @end

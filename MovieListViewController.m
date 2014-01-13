@@ -8,10 +8,9 @@
 
 #import "MovieListViewController.h"
 #import "MovieCell.h"
+#import "Movie.h"
 
 @interface MovieListViewController ()
-
-
 
 @property (nonatomic,strong) NSArray *movies;
 
@@ -19,22 +18,10 @@
 
 @implementation MovieListViewController
 
-//- (id)initWithStyle:(UITableViewStyle)style
-//{
-  //  self = [super initWithStyle:style];
-    //if (self) {
-      //  self.movies = [NSArray array]; // empty array
-   // }
-    
-    //NSLog(@"testing123");
-    //return self;
-//}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    NSLog(@"testing123");
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -80,32 +67,24 @@
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSDictionary *movie = [self.movies objectAtIndex:indexPath.row];
+    
+    Movie* movieModel = [[Movie alloc] init];
+    [movieModel setValues:movie];
 
     //set movie title
-    cell.movieTitleLabel.text = [movie objectForKey:@"title"];
     cell.movieTitleLabel.numberOfLines = 2;
+    cell.movieTitleLabel.text = movieModel.title;
     
     //set movie description
     cell.movieSummaryLabel.numberOfLines = 5;
-    cell.movieSummaryLabel.text = [movie objectForKey:@"synopsis"];
+    cell.movieSummaryLabel.text = movieModel.synopsis;
 
     //set movie image
-    NSDictionary* posters = [movie objectForKey:@"posters"]; //pointer for the object posters
-    NSURL* imageUrl = [NSURL URLWithString:[posters objectForKey:@"thumbnail"]]; //get url and set to imageUrl
-    NSData *imageData = [NSData dataWithContentsOfURL:imageUrl]; //
-    UIImage * image = [UIImage imageWithData:imageData];
-    cell.movieImageLabel.image = image;
+    cell.movieImageLabel.image = movieModel.imageData;
     
     //set movie casts
-    NSMutableArray* actors = [NSMutableArray array];
-    NSArray* casts = [movie objectForKey:@"abridged_cast"]; // get all casts
-    for (int i=0;i < casts.count; i++) { // loop through casts one at a time
-        NSDictionary* cast = [casts objectAtIndex:i]; //pointer for the array
-        NSString* actor = [cast objectForKey:@"name"]; // set cast name to string actor
-        [actors addObject:actor]; // push/append actor to array actors
-    }
     cell.movieCastLabel.numberOfLines = 3;
-    cell.movieCastLabel.text = [actors componentsJoinedByString:@", "];
+    cell.movieCastLabel.text = movieModel.actors;
     
     return cell;
 }
