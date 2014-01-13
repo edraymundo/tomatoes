@@ -15,6 +15,6 @@
 @property (strong,nonatomic) UIImage *imageData;
 @property (strong,nonatomic) NSString *actors;
 
-- (id) setValues: (NSDictionary *) values;
+- (id) getValues: (NSDictionary *) values;
 
 @end

@@ -10,7 +10,7 @@
 
 @implementation Movie
 
-- (id)setValues:(NSDictionary *) values{
+- (id)getValues:(NSDictionary *) values{
 
     // set title
     self.title = [values objectForKey:@"title"];

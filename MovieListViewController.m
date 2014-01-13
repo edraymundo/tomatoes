@@ -69,7 +69,7 @@
     NSDictionary *movie = [self.movies objectAtIndex:indexPath.row];
     
     Movie* movieModel = [[Movie alloc] init];
-    [movieModel setValues:movie];
+    [movieModel getValues:movie];
 
     //set movie title
     cell.movieTitleLabel.numberOfLines = 2;
